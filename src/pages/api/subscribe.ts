@@ -13,6 +13,7 @@ type User = {
   };
 };
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default async (request: NextApiRequest, response: NextApiResponse) => {
   if (request.method === "POST") {
     const session = await getSession({ req: request });
@@ -27,8 +28,6 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
     );
 
     let customerId = user.data.stripeCustomerId;
-
-    console.log(customerId);
 
     if (!customerId) {
       const stripeCustomer = await stripe.customers.create({
